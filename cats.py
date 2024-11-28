@@ -2,8 +2,11 @@ from tkinter import *
 from PIL import Image, ImageTk # библиотеки для загрузки изображения
 import requests
 from tkinter import messagebox as mb
-
+from tkinter import ttk#набор улучшенных виджетов
 from io import BytesIO#ввод вывод информации в двоичном виде
+
+Allowed_tags = ['white', 'black', 'funny', 'happy', 'sleep', 'jump', 'fight', 'cute', 'bengal', 'siamese']
+
 def load_image(url):
     try:
         response = requests.get(url)
@@ -20,7 +23,7 @@ def load_image(url):
 
 
 def open_new_window():
-    tag_cat = tag_entry.get()
+    tag_cat = tag_combobox.get()
     url = f'https://cataas.com/cat/{tag_cat}' if tag_cat else 'https://cataas.com/cat'
     img = load_image(url)
     if img:
@@ -42,12 +45,18 @@ window = Tk()
 window.title('Cats')
 window.geometry('500x80')
 
-tag_entry = Entry()
-tag_entry.pack()
+#tag_entry = Entry()
+#tag_entry.pack()
 
+tag_label = Label(text='Выбери тег')
+tag_label.pack()
+
+
+tag_combobox = ttk.Combobox(values=Allowed_tags)
+tag_combobox.pack()
 button = Button(text = 'Загрузить по тегу котика', command = open_new_window)
 button.pack()
-open_new_window()
+
 window.mainloop()
 
 
