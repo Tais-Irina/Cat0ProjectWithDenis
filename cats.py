@@ -1,6 +1,7 @@
 from tkinter import *
 from PIL import Image, ImageTk # библиотеки для загрузки изображения
 import requests
+from tkinter import messagebox as mb
 
 from io import BytesIO#ввод вывод информации в двоичном виде
 def load_image(url):
@@ -14,12 +15,13 @@ def load_image(url):
         img.thumbnail((600,480), Image.Resampling.LANCZOS)
         return ImageTk.PhotoImage(img)
     except Exception as e:
-        print(f'Error {e}.')
+        mb.showinfo("Предупреждение","Такого тега нет, введите другой тег")
         return None
 
 
 def open_new_window():
-    url = 'https://cataas.com/cat'
+    tag_cat = tag_entry.get()
+    url = f'https://cataas.com/cat/{tag_cat}' if tag_cat else 'https://cataas.com/cat'
     img = load_image(url)
     if img:
         new_window = Toplevel(window)
@@ -30,7 +32,6 @@ def open_new_window():
         l.config(image=img)
         l.image = img
         # если картинка присвоена, то сборщик мусора ее не удалит
-    img = load_image(url)
 
 def exit():
     window.destroy()
@@ -40,6 +41,16 @@ def exit():
 window = Tk()
 window.title('Cats')
 window.geometry('500x80')
+
+tag_entry = Entry()
+tag_entry.pack()
+
+button = Button(text = 'Загрузить по тегу котика', command = open_new_window)
+button.pack()
+open_new_window()
+window.mainloop()
+
+
 '''
 menu_bar = Menu(window)
 window.config(menu=menu_bar)
@@ -51,8 +62,5 @@ file_menu.add_separator()
 file_menu.add_command(label='Выход', command=exit)
 '''
 
-button = Button(text = 'Картинка котика', command = open_new_window)
-button.pack()
-open_new_window()
 
-window.mainloop()
+
