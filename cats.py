@@ -5,7 +5,7 @@ from tkinter import messagebox as mb
 from tkinter import ttk#набор улучшенных виджетов
 from io import BytesIO#ввод вывод информации в двоичном виде
 
-Allowed_tags = ['white', 'black', 'funny', 'happy', 'sleep', 'jump', 'fight', 'cute', 'bengal', 'siamese']
+Allowed_tags = ['white', 'black', 'red','funny', 'happy', 'sleep', 'jump', 'fight', 'cute', 'bengal', 'siamese']
 
 def load_image(url):
     try:
