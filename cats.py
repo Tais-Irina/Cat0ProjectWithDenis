@@ -18,26 +18,29 @@ def load_image(url):
         return None
 
 
-def update_img():
+def open_new_window():
     url = 'https://cataas.com/cat'
     img = load_image(url)
     if img:
-        label.config(image=img)
-        label.image = img
+        new_window = Toplevel(window)
+        new_window.title("Картинка с котиком")
+        new_window.geometry('600x480')
+        l = Label(new_window)
+        l.pack()
+        l.config(image=img)
+        l.image = img
         # если картинка присвоена, то сборщик мусора ее не удалит
     img = load_image(url)
-    if img:
-        label.config(image=img)
-        label.image = img
-        # если картинка присвоена, то сборщик мусора ее не удалит
 
 def exit():
     window.destroy()
+
+
 #графический интерфейс для отправки запросов к api
 window = Tk()
 window.title('Cats')
-window.geometry('600x520')
-
+window.geometry('500x80')
+'''
 menu_bar = Menu(window)
 window.config(menu=menu_bar)
 
@@ -46,12 +49,10 @@ menu_bar.add_cascade(label='Файл', menu=file_menu)
 file_menu.add_command(label='Загрузить фото', command=update_img)
 file_menu.add_separator()
 file_menu.add_command(label='Выход', command=exit)
-label = Label()
-label.pack()
+'''
 
-# update_button = Button(text = 'Обновить', command = update_img)
-# update_button.pack()
-
-update_img()
+button = Button(text = 'Картинка котика', command = open_new_window)
+button.pack()
+open_new_window()
 
 window.mainloop()
