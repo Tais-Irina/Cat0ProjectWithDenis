@@ -15,6 +15,21 @@ def load_image(url):
         print(f'Error {e}.')
         return None
 
+
+def update_img():
+    url = 'https://cataas.com/cat'
+
+    img = load_image(url)
+    if img:
+        label.config(image=img)
+        label.image = img
+        # если картинка присвоена, то сборщик мусора ее не удалит
+
+    img = load_image(url)
+    if img:
+        label.config(image=img)
+        label.image = img
+        # если картинка присвоена, то сборщик мусора ее не удалит
 #графический интерфейс для отправки запросов к api
 window = Tk()
 window.title('Cats')
@@ -22,10 +37,9 @@ window.geometry('600x400')
 label = Label()
 label.pack()
 
-url = 'htts://cataas.com/cat'
-img = load_image(url)
-if img:
-    label.config(image=img)
-    label.image = img
-    #если картинка присвоена, то сборщик мусора ее не удалит
+update_button = Button(text = 'Обновить', command = update_img)
+update_button.pack()
+
+update_img()
+
 window.mainloop()
